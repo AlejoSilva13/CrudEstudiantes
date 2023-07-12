@@ -134,7 +134,7 @@ namespace CrudEstudiantes.Controllers
             try
             {
                 Estudiante alumnos = bd.Estudiante.Where(x => x.Id == request.Id).OrderByDescending(x => x.Id).FirstOrDefault();
-                
+
 
                 if (alumnos != null)
                 {
@@ -283,6 +283,136 @@ namespace CrudEstudiantes.Controllers
                 else
                 {
                     response.Mensaje = "Profesor no existe";
+                    response.IdError = -99;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return Json(response);
+        }
+        #endregion
+
+        #region Nota
+        [HttpGet]
+        [Route("consultarNota")]
+
+        public JsonResult<ConsultarNotaRs> ConsultingNote()
+        {
+            ConsultarNotaRs response = new ConsultarNotaRs();
+
+            try
+            {
+                List<Nota> LstNota = bd.Nota.OrderByDescending(x => x.Id).ToList();
+
+                if (LstNota.Count > 0)
+                {
+                    response.Notas = LstNota;
+                }
+                else
+                {
+                    response.Mensaje = "No hay datos";
+                    response.IdError = -99;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return Json(response);
+        }
+
+        [HttpPost]
+        [Route("insertarNota")]
+
+        public JsonResult<InsertarNotaRs> InsertNote(InsertarNotaRq request)
+        {
+            InsertarNotaRs response = new InsertarNotaRs();
+
+            try
+            {
+                Nota nota = new Nota
+                {
+                     Nomre = request.Nombre,
+                    IdProfesor = request.IdProfesor,
+                    IdEstudiante = request.IdEstudiante,
+                    valor = request.Valor,
+                };
+
+                bd.Nota.Add(nota);
+                bd.SaveChanges();
+
+                response.Mensaje = "Nota insertada con exito";
+                response.IdError = 0;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return Json(response);
+        }
+        [HttpPut]
+        [Route("actualizarNota")]
+
+        public JsonResult<ActualizarNotaRs> UpdateNote(ActualizarNotaRq request)
+        {
+            ActualizarNotaRs response = new ActualizarNotaRs();
+
+            try
+            {
+                Nota nota = bd.Nota.Where(x => x.Id == request.Id).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                if (nota != null)
+                {
+                    nota.Nomre = request.Nombre;
+                    nota.IdProfesor = request.IdProfesor;
+                    nota.IdEstudiante = request.IdEstudiante;
+                    nota.valor = request.Valor;
+
+                    bd.Entry(nota).State = EntityState.Modified;
+                    bd.SaveChanges();
+
+                    response.Mensaje = "Datos de nota actualizados con exito";
+                    response.IdError = 0;
+                }
+                else
+                {
+                    response.Mensaje = "nota no existe";
+                    response.IdError = -3;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return Json(response);
+        }
+
+        [HttpDelete]
+        [Route("eliminarNota")]
+
+        public JsonResult<EliminarNotaRs> DeleteNote(EliminarNotaRq request)
+        {
+            EliminarNotaRs response = new EliminarNotaRs();
+
+            try
+            {
+                Nota nota = bd.Nota.Where(x => x.Id == request.Id).OrderByDescending(x => x.Id).FirstOrDefault();
+
+
+                if (nota != null)
+                {
+                    bd.Nota.Remove(nota);
+                    bd.SaveChanges();
+
+                    response.Mensaje = "Nota eliminada con exito";
+                    response.IdError = 0;
+                }
+                else
+                {
+                    response.Mensaje = "Nota no existe";
                     response.IdError = -99;
                 }
             }
