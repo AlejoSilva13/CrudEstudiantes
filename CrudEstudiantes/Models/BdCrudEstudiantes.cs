@@ -26,13 +26,8 @@ namespace CrudEstudiantes.Models
                 .Property(e => e.Identificacion)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Estudiante>()
-                .HasMany(e => e.Nota)
-                .WithOptional(e => e.Estudiante)
-                .HasForeignKey(e => e.IdEstudiante);
-
             modelBuilder.Entity<Nota>()
-                .Property(e => e.Nomre)
+                .Property(e => e.Nombre)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Profesor>()
@@ -42,11 +37,6 @@ namespace CrudEstudiantes.Models
             modelBuilder.Entity<Profesor>()
                 .Property(e => e.Identificacion)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Profesor>()
-                .HasMany(e => e.Nota)
-                .WithOptional(e => e.Profesor)
-                .HasForeignKey(e => e.IdProfesor);
         }
     }
 }

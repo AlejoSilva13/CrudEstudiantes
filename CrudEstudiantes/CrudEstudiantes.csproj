@@ -186,6 +186,7 @@
     <Compile Include="Busines\Response\EliminarAlumnosRs.cs" />
     <Compile Include="Busines\Response\EliminarNotaRs.cs" />
     <Compile Include="Busines\Response\EliminarProfesorRs.cs" />
+    <Compile Include="Busines\Response\EstudianteDTO.cs" />
     <Compile Include="Busines\Response\InsertarEstudianteRs.cs" />
     <Compile Include="Busines\Response\InsertarNotaRs.cs" />
     <Compile Include="Busines\Response\InsertarProfesorRs.cs" />

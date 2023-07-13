@@ -13,16 +13,12 @@ namespace CrudEstudiantes.Models
 
         [Required]
         [StringLength(255)]
-        public string Nomre { get; set; }
+        public string Nombre { get; set; }
 
         public int? IdProfesor { get; set; }
 
         public int? IdEstudiante { get; set; }
 
-        public double? valor { get; set; }
-
-        public virtual Estudiante Estudiante { get; set; }
-
-        public virtual Profesor Profesor { get; set; }
+        public double? Valor { get; set; }
     }
 }

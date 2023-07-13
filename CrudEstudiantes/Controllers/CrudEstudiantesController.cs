@@ -37,6 +37,7 @@ namespace CrudEstudiantes.Controllers
 
                 if (LstEstudiante.Count > 0)
                 {
+
                     response.Estudiantes = LstEstudiante;
                 }
                 else
@@ -161,7 +162,7 @@ namespace CrudEstudiantes.Controllers
         #region Profesores
 
         [HttpGet]
-        [Route("consultarAlumno")]
+        [Route("consultarProfesor")]
 
         public JsonResult<ConsultarProfesorRs> ConsultingTeacher()
         {
@@ -334,10 +335,10 @@ namespace CrudEstudiantes.Controllers
             {
                 Nota nota = new Nota
                 {
-                     Nomre = request.Nombre,
+                     Nombre = request.Nombre,
                     IdProfesor = request.IdProfesor,
                     IdEstudiante = request.IdEstudiante,
-                    valor = request.Valor,
+                    Valor = request.Valor,
                 };
 
                 bd.Nota.Add(nota);
@@ -366,10 +367,10 @@ namespace CrudEstudiantes.Controllers
 
                 if (nota != null)
                 {
-                    nota.Nomre = request.Nombre;
+                    nota.Nombre = request.Nombre;
                     nota.IdProfesor = request.IdProfesor;
                     nota.IdEstudiante = request.IdEstudiante;
-                    nota.valor = request.Valor;
+                    nota.Valor = request.Valor;
 
                     bd.Entry(nota).State = EntityState.Modified;
                     bd.SaveChanges();
